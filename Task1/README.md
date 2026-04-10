@@ -17,15 +17,6 @@ but lastly I increased the vocab_size to 12000 . at vocab_size of 12000 I found 
 2. My model is not currently picking up the newline character after each character's name which I have to reasearch on why. I tried to briefy look into it but I am getting varied answers
 
 
-## training and early stopping
-I trained this on my local gpu . I used the AdamW optimizer with a learning_rate of 1e-4 so it learns slowly and carefully . 
-I implemented early stopping with a patience limit . what is the val loss why is it important to monitor it more than the training loss ? because training loss just shows memorization . my code tracks the val loss and saves the best weights before the gap between train and val starts diverging , ensuring the model actually generalizes 
-
-## references
-- **Andrej Karpathy's "Let's build GPT" (YouTube):** used this as the core foundation to understand the math behind multi-head self-attention and causal masking
-- **PyTorch Documentation:** used for implementing `nn.Module` , `nn.Embedding` , and `AdamW`
-- **HuggingFace Tokenizers Library:** used the documentation to figure out how to train and implement the custom BPE tokenizer from scratch
-
 ## References and resources used :  
 1. The main structure of the code follows the code provided by **Andrej Karpathy** in his video on gpt-2 and the corresponding repo for the same video <br>
    https://www.youtube.com/watch?v=kCc8FmEb1nY&t=4698s <br>
