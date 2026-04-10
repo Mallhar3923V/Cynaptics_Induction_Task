@@ -1,21 +1,40 @@
 # Cynaptics induction task 1 - shakespeare GPT
 
 This is my submission for the cynaptics club induction task 1 . I built a decoder-only transformer model from scratch in pytorch to generate shakespeare text 
+## How to run : 
+- This Task1 Folder contains all the files required to directly start training the model by running only the **GPT2.py** file only the installation of the tokenisers library is needed
 
-## architecture details :
+## Architecture details :
 - **parameters:** around 20M parameters . Is 20M parameters a lot ? for a 1MB dataset it is a bit oversized but I kept it so the model had the capacity to learn complex stylistic nuances and words that it previously did not learn on smaller `vocab_size`
 - **layers & heads:** 6 transformer blocks with 6 attention heads and 384 embedding dimension
 - **activation:** used GELU intead of the standard ReLU so we don't face any issues due to dead neurons
-- **Optimizer** used the AdamW , even though this optimizer requires a weight_delay parameter. I have not added it. I did implement in one of my training runs but wasn't satisfied with the output so instead of introducing another hyperparameter that I would have to tweak around and figure out the optimum value of I scrapped that idea from the final submission
+- **Optimizer** used the AdamW , even though this optimizer requires a weight_delay parameter. I have not added it. I did implement in one of my training runs but wasn't satisfied with the output so instead of introducing another hyperparameter that I would have to tweak around and figure out the optimum value of I scrapped that idea from the final submission  
 
 ## tokenizer :
 I trained a custom Byte-Pair Encoding (BPE) tokenizer that I imported from the hugging face's tokeinizers library. Initially I tried a vocab_size of 301 but it kept splitting words into sub-word fragments like 'd es' . 
 I also experimented with the `vocab_size` of 5000 which gave better results than 301
 but lastly I increased the vocab_size to 12000 . at vocab_size of 12000 I found that it had picked complex words perfectly without fragmentation so I am keeping this `vocab_size` of 12000  
 
+## HyperParameters : 
+ 
+| Parameter | Value | Notes |
+|---|---|---|
+| `n_embd` | 384 | Embedding dimension per token |
+| `n_head` | 6 | Attention heads per block (64 dims each) |
+| `n_layer` | 6 | Transformer blocks stacked |
+| `block_size` | 256 | Maximum context length in tokens |
+| `batch_size` | 64 | Sequences processed per training step |
+| `dropout` | 0.3 | Fraction of neurons dropped during training to reduce overfitting |
+| `learning_rate` | 1e-4 | AdamW learning rate |
+| `total_iters` | 1000 | Training steps — early stopping saves the best checkpoint |
+| `eval_interval` | 50 | Steps between validation loss checks |
+ 
+**Total parameters: ~20M**  
+
+A note on model size: with a vocab size of 12,000 and 6 layers, the parameter count is higher than typical for a dataset this small. The larger embedding dimension helps the model represent the wider vocabulary more expressively — each of the 12,000 tokens gets a richer learned vector. The tradeoff is faster overfitting, which is why dropout of 0.35 and early stopping are both important here.
 along with this I have also implemented a temperature input prompt so that the user can set temperature on their will
 - lower temperature will cause the model to use words that are even slightly more likely a lot more and inturn repeat the output more
-- higher temperature on the other hand will cause the model to be more creative in a sense that it will output more random and not only the more likely words
+- higher temperature on the other hand will cause the model to be more creative in a sense that it will output more random and not only the more likely words <br>
   
 ## Problems Faced : 
 1. The problem with 12000 `vocab_size` is that the model does pick up complex words but fails to extract enough semantic/grammatical meaning from them to create a meaning ful sentence. This is becases the dataset is too small for 12000 tokenizers to learn the grammatical context in which each of them is used.
