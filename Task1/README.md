@@ -1,6 +1,6 @@
 # cynaptics induction task 1 - shakespeare GPT
 
-this is my submission for the cynaptics club induction task 1 . I built a decoder-only transformer model from scratch in pytorch to generate shakespeare text 
+This is my submission for the cynaptics club induction task 1 . I built a decoder-only transformer model from scratch in pytorch to generate shakespeare text 
 
 ## architecture details :
 - **parameters:** around 20M parameters . Is 20M parameters a lot ? for a 1MB dataset it is a bit oversized but I kept it so the model had the capacity to learn complex stylistic nuances and words that it previously did not learn on smaller `vocab_size`
@@ -11,8 +11,13 @@ this is my submission for the cynaptics club induction task 1 . I built a decode
 ## tokenizer :
 I trained a custom Byte-Pair Encoding (BPE) tokenizer that I imported from the hugging face's tokeinizers library. Initially I tried a vocab_size of 301 but it kept splitting words into sub-word fragments like 'd es' . 
 I also experimented with the `vocab_size` of 5000 which gave better results than 301
-but lastly I increased the vocab_size to 12000 . at vocab_size of 12000 I found that it had picked complex words perfectly without fragmentation so I am keeping this `vocab_size` of 12000 
-## The problems Faced : 
+but lastly I increased the vocab_size to 12000 . at vocab_size of 12000 I found that it had picked complex words perfectly without fragmentation so I am keeping this `vocab_size` of 12000  
+
+along with this I have also implemented a temperature input prompt so that the user can set temperature on their will
+- lower temperature will cause the model to use words that are even slightly more likely a lot more and inturn repeat the output more
+- higher temperature on the other hand will cause the model to be more creative in a sense that it will output more random and not only the more likely words
+  
+## Problems Faced : 
 1. The problem with 12000 `vocab_size` is that the model does pick up complex words but fails to extract enough semantic/grammatical meaning from them to create a meaning ful sentence. This is becases the dataset is too small for 12000 tokenizers to learn the grammatical context in which each of them is used.
 2. My model is not currently picking up the newline character after each character's name which I have to reasearch on why. I tried to briefy look into it but I am getting varied answers
 
