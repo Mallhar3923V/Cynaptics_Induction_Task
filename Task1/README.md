@@ -1,32 +1,30 @@
-cynaptics induction task 1 - GPT-2 trained on shakespeare text
-this is my submission for the cynaptics club induction task 1 . I built a decoder-only transformer model from scratch in pytorch to generate shakespeare text
+# cynaptics induction task 1 - shakespeare GPT
 
-architecture details
-parameters: around 14.5M parameters . is 10M parameters a lot ? for a 1MB dataset it is a bit oversized but I kept it so the model had the capacity to learn complex stylistic nuances instead of just shrinking the architecture
+this is my submission for the cynaptics club induction task 1 . I built a decoder-only transformer model from scratch in pytorch to generate shakespeare text 
 
-layers & heads: 6 transformer blocks with 6 attention heads and 384 embedding dimension
+## architecture details :
+- **parameters:** around 20M parameters . Is 20M parameters a lot ? for a 1MB dataset it is a bit oversized but I kept it so the model had the capacity to learn complex stylistic nuances and words that it previously did not learn on smaller `vocab_size`
+- **layers & heads:** 6 transformer blocks with 6 attention heads and 384 embedding dimension
+- **activation:** used GELU intead of the standard ReLU so we don't face any issues due to dead neurons
+- **Optimizer** used the AdamW , even though this optimizer requires a weight_delay parameter. I have not added it. I did implement in one of my training runs but wasn't satisfied with the output so instead of introducing another hyperparameter that I would have to tweak around and figure out the optimum value of I scrapped that idea from the final submission
 
-activation: used GELU intead of the standard ReLU for smoother gradient flow
+## tokenizer :
+I trained a custom Byte-Pair Encoding (BPE) tokenizer that I imported from the hugging face's tokeinizers library. Initially I tried a vocab_size of 301 but it kept splitting words into sub-word fragments like 'd es' . 
+I also experimented with the `vocab_size` of 5000 which gave better results than 301
+but lastly I increased the vocab_size to 12000 . at vocab_size of 12000 I found that it had picked complex words perfectly without fragmentation so I am keeping this `vocab_size` of 12000 
+## The problems Faced : 
+1. The problem with 12000 `vocab_size` is that the model does pick up complex words but fails to extract enough semantic/grammatical meaning from them to create a meaning ful sentence. This is becases the dataset is too small for 12000 tokenizers to learn the grammatical context in which each of them is used.
+2. My model is not currently picking up the newline character after each character's name which I have to reasearch on why. I tried to briefy look into it but I am getting varied answers
 
-tokenizer and the 12k vocab trade off
-I trained a custom Byte-Pair Encoding (BPE) tokenizer . initially I tried a vocab_size of 301 but it kept splitting words into sub-word fragments like 'd es' .
-I increased the vocab_size to 12000 . at vocab_size of 12000 I found that it had picked complex words perfectly without fragmentation so I am keeping this vocab_size of 12000 .
 
-the architectural trade off is that 12000 tokens on a tiny 1MB dataset creates a sparse transition matrix . the model formats things perfectly and uses great vocabulary like 'chamber' and 'disease' but sometimes struggles with the grammatical logic because it hasn't seen the rare words enough times . I used a dropout of 0.3 and weight decay of 0.0 to keep the logits sharp while preventing it from just overfitting and memorizing the dataset
+## training and early stopping
+I trained this on my local gpu . I used the AdamW optimizer with a learning_rate of 1e-4 so it learns slowly and carefully . 
+I implemented early stopping with a patience limit . what is the val loss why is it important to monitor it more than the training loss ? because training loss just shows memorization . my code tracks the val loss and saves the best weights before the gap between train and val starts diverging , ensuring the model actually generalizes 
 
-formatting and newlines
-why is the model not currently learning the newline character after each character name ? because the cross-entropy loss prioritizes semantic meaning over syntax . instead of retraining the entire tokenizer and model from scratch with a special newline token today only and risking breaking the tensor shapes , I added a regex post-processing function in the inference loop . it intercepts the raw decoded string and automatically formats the script with newlines after character names . this separates the neural network logic from the UI presentation
-
-training and early stopping
-I trained this on my local gpu from the terminal . I used the AdamW optimizer with a learning_rate of 1e-4 so it learns slowly and carefully .
-I implemented early stopping with a patience limit . what is the val loss why is it important to monitor it more than the training loss ? because training loss just shows memorization . my code tracks the val loss and saves the best weights before the gap between train and val starts diverging , ensuring the model actually generalizes
-
-references and sites used
-Andrej Karpathy's "Let's build GPT" (YouTube): used this as the core foundation to understand the math behind multi-head self-attention , causal masking , and the overall gpt block structure
-
-PyTorch Documentation: used for implementing nn.Module , nn.Embedding , and the AdamW optimizer
-
-HuggingFace Tokenizers Library: used the documentation to figure out how to train and implement the custom BPE tokenizer from scratch
+## references
+- **Andrej Karpathy's "Let's build GPT" (YouTube):** used this as the core foundation to understand the math behind multi-head self-attention and causal masking
+- **PyTorch Documentation:** used for implementing `nn.Module` , `nn.Embedding` , and `AdamW`
+- **HuggingFace Tokenizers Library:** used the documentation to figure out how to train and implement the custom BPE tokenizer from scratch
 
 ## References and resources used :  
 1. The main structure of the code follows the code provided by **Andrej Karpathy** in his video on gpt-2 and the corresponding repo for the same video <br>
