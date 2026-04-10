@@ -31,7 +31,7 @@ but lastly I increased the vocab_size to 12000 . at vocab_size of 12000 I found 
  
 **Total parameters: ~20M**  
 
-A note on model size: with a vocab size of 12,000 and 6 layers, the parameter count is higher than typical for a dataset this small. The larger embedding dimension helps the model represent the wider vocabulary more expressively — each of the 12,000 tokens gets a richer learned vector. The tradeoff is faster overfitting, which is why dropout of 0.35 and early stopping are both important here.
+A note on model size: with a vocab size of 12,000 and 6 layers, the parameter count is higher than typical for a dataset this small. The larger embedding dimension helps the model represent the wider vocabulary more expressively — each of the 12,000 tokens gets a richer learned vector. The tradeoff is faster overfitting, which is why dropout of 0.3 and early stopping are both important here.
 along with this I have also implemented a temperature input prompt so that the user can set temperature on their will
 - lower temperature will cause the model to use words that are even slightly more likely a lot more and inturn repeat the output more
 - higher temperature on the other hand will cause the model to be more creative in a sense that it will output more random and not only the more likely words <br>
