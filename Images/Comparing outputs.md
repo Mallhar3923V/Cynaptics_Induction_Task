@@ -1,4 +1,4 @@
-# File comparing the output for different hyperparameters
+# File wiht outputs for different hyperparameters
 
 ## 1. For everything same but dropout = 0.3 and no weight_decay, generating 100 tokens only
    
