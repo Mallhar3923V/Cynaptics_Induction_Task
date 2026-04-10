@@ -17,7 +17,7 @@ n_embd = 384
 n_head = 6
 n_layer = 6
 weight_decay = 1e-1
-dropout = 0.2
+dropout = 0.35
 # ------------
 
 torch.manual_seed(7)
