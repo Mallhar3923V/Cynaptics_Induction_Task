@@ -8,7 +8,7 @@ This is my submission for the cynaptics club induction task 1 . I built a decode
 - **parameters:** around 20M parameters . Is 20M parameters a lot ? for a 1MB dataset it is a bit oversized but I kept it so the model had the capacity to learn complex stylistic nuances and words that it previously did not learn on smaller `vocab_size`
 - **layers & heads:** 6 transformer blocks with 6 attention heads and 384 embedding dimension
 - **activation:** used GELU intead of the standard ReLU so we don't face any issues due to dead neurons
-- **Optimizer** used the AdamW , even though this optimizer requires a weight_delay parameter. I have not added it. I did implement in one of my training runs but wasn't satisfied with the output so instead of introducing another hyperparameter that I would have to tweak around and figure out the optimum value of I scrapped that idea from the final submission  
+- **Optimizer** AdamW with a learning rate of 1e-4  
 
 ## tokenizer :
 I trained a custom Byte-Pair Encoding (BPE) tokenizer that I imported from the hugging face's tokeinizers library. Initially I tried a vocab_size of 301 but it kept splitting words into sub-word fragments like 'd es' . 
