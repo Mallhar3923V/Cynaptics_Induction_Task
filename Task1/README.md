@@ -37,8 +37,8 @@ along with this I have also implemented a temperature input prompt so that the u
 - higher temperature on the other hand will cause the model to be more creative in a sense that it will output more random and not only the more likely words <br>
   
 ## Problems Faced : 
-1. The problem with 12000 `vocab_size` is that the model does pick up complex words but fails to extract enough semantic/grammatical meaning from them to create a meaning ful sentence. This is becases the dataset is too small for 12000 tokenizers to learn the grammatical context in which each of them is used.
-2. My model is not currently picking up the newline character after each character's name which I have to reasearch on why. I tried to briefy look into it but I am getting varied answers
+1. The problem with 12000 `vocab_size` is that the model does pick up complex words but fails to extract enough semantic/grammatical meaning from them to create a meaningful sentence. This is becases the dataset is too small for 12000 tokenizers to learn the grammatical context in which each of them is used.
+2. My model is not currently picking up the newline character after each character's name which I have to research on why. I tried to briefly look into it but I am getting varied answers
 
 ## Sample inputs and outputs with varied inputs and outputs
 
