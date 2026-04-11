@@ -16,7 +16,7 @@ eval_iters = 50
 n_embd = 384
 n_head = 6
 n_layer = 6
-#weight_decay = 1e-1
+weight_decay = 1e-1
 dropout = 0.3
 # ------------
 
@@ -203,7 +203,7 @@ m = model.to(device)
 print(sum(p.numel() for p in m.parameters())/1e6, 'M parameters')
 
 # create a PyTorch optimizer
-optimizer = torch.optim.AdamW(model.parameters(), lr = learning_rate)
+optimizer = torch.optim.AdamW(model.parameters(), lr = learning_rate, weight_decay = weight_decay)
 
 best_val_loss = float('inf')
 
