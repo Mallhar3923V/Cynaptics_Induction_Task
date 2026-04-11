@@ -91,9 +91,11 @@ Brother, your father would I think.
 <br>
 - dropout = 0.4, Temperature = 0.7<br>
   input : To be, or not to be<br>
-  output :<br>
-To be, or not to br Murderer:<br>
-Which we have aid'd to-night;<br>
+  output :
+
+To be, or not to br Murderer:  
+
+Which we have aid'd to-night;  
 For his day be done with a presence,<br>
 With all of Lancaster and my life shall be the harvest of this hour:
 At the morning doth?
