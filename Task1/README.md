@@ -40,58 +40,58 @@ along with this I have also implemented a temperature input prompt so that the u
 ## Sample inputs and outputs with varied inputs and outputs
 - droupout = 0.3, Temperature = 0.7
   Input = To be or not to be
-  Output :
+  Output : <br>
 To be, or not to be born.
-
+<br>
 From my aid to go, my noble late is the day.
-
-
+<br>
+<br>
 What is! what is my lord,
-
+<br>
 DUCHESS OF YORK:
 My Lord:
 At the morning?
-
+<br>
 Take your love you may be a cause.
-
-
+<br>
+<br>
 Then did I'll have made it is the Earl of safeguard of the duke?
-
+<br>
 KING EDWARD IV:
 Good cousin! what's doom?
-
+<br>
 ROMEO:
 A happy day,
 To complain, but a sake, thou wash him so much.
-
+<br>
 QUEEN ELIZABETH:
 KING HENRY VI:
 No, my lord, well;
-
+<br>
 I am too,
 The king, my lord.
-
+<br>
 My lord, brother is there, like manacles, that I from the crown, good lord, I'll not of my lord.
-
+<br>
 And not,
-
+<br>
 To make a case are weak tears to me the king:
 Some power.
-
-
+<br>
+<br>
 Now never tears to the king, and divine and his intent, Aufidius,
 And thou shalt not, I pray,
 Or, my lord,
 Or, I know I have made himself:
 'er struck in this royal king.
-
-
+<br>
+<br>
 
 Brother, your father would I think.
-
-- dropout = 0.4, Temperature = 0.7
-  input : To be, or not to be
-  output :
+<br>
+- dropout = 0.4, Temperature = 0.7<br>
+  input : To be, or not to be<br>
+  output :<br>
   To be, or not to br Murderer:
 Which we have aid'd to-night;
 For his day be done with a presence,
