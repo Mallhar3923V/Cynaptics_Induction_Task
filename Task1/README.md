@@ -38,80 +38,58 @@ along with this I have also implemented a temperature input prompt so that the u
   
 
 ## Sample inputs and outputs with varied inputs and outputs
-- droupout = 0.3, Temperature = 0.7
+- droupout = 0.3, Temperature = 0.7, tokens generated = 256
   Input = To be or not to be
   Output : <br>
+```
 To be, or not to be born.
-<br>
 From my aid to go, my noble late is the day.
-<br>
-<br>
 What is! what is my lord,
-<br>
 DUCHESS OF YORK:
 My Lord:
 At the morning?
-<br>
 Take your love you may be a cause.
-<br>
-<br>
 Then did I'll have made it is the Earl of safeguard of the duke?
-<br>
 KING EDWARD IV:
 Good cousin! what's doom?
-<br>
 ROMEO:
 A happy day,
 To complain, but a sake, thou wash him so much.
-<br>
 QUEEN ELIZABETH:
 KING HENRY VI:
 No, my lord, well;
-<br>
 I am too,
 The king, my lord.
-<br>
 My lord, brother is there, like manacles, that I from the crown, good lord, I'll not of my lord.
-<br>
 And not,
-<br>
 To make a case are weak tears to me the king:
 Some power.
-<br>
-<br>
 Now never tears to the king, and divine and his intent, Aufidius,
 And thou shalt not, I pray,
 Or, my lord,
 Or, I know I have made himself:
 'er struck in this royal king.
-<br>
-<br>
-
 Brother, your father would I think.
+```
+---
+
 <br>
-- dropout = 0.4, Temperature = 0.7<br>
+- dropout = 0.4, Temperature = 0.7, tokens generated = 256 <br>
   input : To be, or not to be<br>
   output :
 
-To be, or not to br Murderer:  
-
-Which we have aid'd to-night;  
-For his day be done with a presence,<br>
+```
+To be, or not to br Murderer:
+Which we have aid'd to-night;
+For his day be done with a presence,
 With all of Lancaster and my life shall be the harvest of this hour:
 At the morning doth?
 Take your enemy.
-
-
 That I cannot-morrow.
-
-
-
 I'll find him.
-
 My lord?
 BRUTUS:
 And, my lord.
-
 Nurse:
 First:
 ROMEO:
@@ -119,32 +97,23 @@ A happy day and let them.
 LEONTES:
 QUEEN ELIZABETH:
 And, good; I shall be.
-
 But that's gage.
-
-
 Why,
-
-
 I am too,
-
 Where my liege, what;
 And now in his life, stay not in the lost a little;
 And these arms, I'll not.
-
-  
 When you, I not, who doth your grace,
-MARCIUS:  
-
+MARCIUS:
 Your lord.
 I have left my knee, and I'll be tears to the king,
 Yet die,
 The noble lord?
-RIVERS:  
-
+RIVERS:
 And yet,
 The state, with the their heads of the world, I have made himself to make you know I am not to-morrow,
 Is I will prove your heart would I think.
+```
   
 
 
