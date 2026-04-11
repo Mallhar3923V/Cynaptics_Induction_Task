@@ -1,46 +1,89 @@
-# Cynaptics induction task 1 - shakespeare GPT
+# 🎭 Shakespeare GPT — Decoder-Only Transformer (PyTorch)
 
-This is my submission for the cynaptics club induction task 1 . I built a decoder-only transformer model from scratch in pytorch to generate shakespeare text 
-## How to run : 
-- This Task1 Folder contains all the files required to directly start training the model by running only the **GPT2.py** file only the installation of the tokenisers library is needed
+This is my submission for the Cynaptics Club Induction Task 1.
+I built a decoder-only transformer model from scratch in PyTorch to generate Shakespeare text.
 
-## Architecture details :
-- **parameters:** around 20M parameters . Is 20M parameters a lot ? for a 1MB dataset it is a bit oversized but I kept it so the model had the capacity to learn complex stylistic nuances and words that it previously did not learn on smaller `vocab_size`
-- **layers & heads:** 6 transformer blocks with 6 attention heads and 384 embedding dimension
-- **activation:** used GELU intead of the standard ReLU so we don't face any issues due to dead neurons
-- **Optimizer** AdamW with a learning rate of 1e-4  
+---
 
-## tokenizer :
-I trained a custom Byte-Pair Encoding (BPE) tokenizer that I imported from the hugging face's tokeinizers library. Initially I tried a vocab_size of 301 but it kept splitting words into sub-word fragments like 'd es' . 
-I also experimented with the `vocab_size` of 5000 which gave better results than 301
-but lastly I increased the vocab_size to 12000 . at vocab_size of 12000 I found that it had picked complex words perfectly without fragmentation so I am keeping this `vocab_size` of 12000  
+## 🚀 How to Run
 
-## HyperParameters : 
- 
-| Parameter | Value | Notes |
-|---|---|---|
-| `n_embd` | 384 | Embedding dimension per token |
-| `n_head` | 6 | Attention heads per block (64 dims each) |
-| `n_layer` | 6 | Transformer blocks stacked |
-| `block_size` | 256 | Maximum context length in tokens |
-| `batch_size` | 64 | Sequences processed per training step |
-| `dropout` | 0.3 | Fraction of neurons dropped during training to reduce overfitting |
-| `learning_rate` | 1e-4 | AdamW learning rate |
-| `total_iters` | 1000 | Training steps — early stopping saves the best checkpoint |
-| `eval_interval` | 50 | Steps between validation loss checks |
- 
-**Total parameters: ~20M**  
+* This `Task1` folder contains all the files required to directly start training the model by running only the **GPT2.py** file.
+* Only installation of the `tokenizers` library is needed:
 
-A note on model size: with a vocab size of 12,000 and 6 layers, the parameter count is higher than typical for a dataset this small. The larger embedding dimension helps the model represent the wider vocabulary more expressively — each of the 12,000 tokens gets a richer learned vector. The tradeoff is faster overfitting, which is why dropout of 0.3 and early stopping are both important here.
-along with this I have also implemented a temperature input prompt so that the user can set temperature on their will
-- lower temperature will cause the model to use words that are even slightly more likely a lot more and inturn repeat the output more
-- higher temperature on the other hand will cause the model to be more creative in a sense that it will output more random and not only the more likely words <br>
-  
+```bash
+pip install tokenizers
+```
 
-## Sample inputs and outputs with varied inputs and outputs
-- droupout = 0.3, Temperature = 0.7, tokens generated = 256
-  Input = To be or not to be
-  Output : <br>
+---
+
+## 🧠 Architecture Details
+
+* **Parameters:** ~20M parameters
+  Is 20M parameters a lot? For a ~1MB dataset, it is a bit oversized, but I kept it so the model had the capacity to learn complex stylistic nuances and words that it previously did not learn on smaller `vocab_size`.
+
+* **Layers & Heads:** 6 transformer blocks with 6 attention heads and 384 embedding dimension
+
+* **Activation:** Used GELU instead of ReLU to avoid dead neurons
+
+* **Optimizer:** AdamW with a learning rate of 1e-4
+
+---
+
+## 🔤 Tokenizer
+
+I trained a custom Byte-Pair Encoding (BPE) tokenizer using Hugging Face's `tokenizers` library.
+
+* Initially tried `vocab_size = 301`, but it split words into fragments like `'d es'`
+* Tried `vocab_size = 5000`, which gave better results
+* Finally used `vocab_size = 12000`, where complex words were captured properly without fragmentation
+
+Final choice: **vocab_size = 12000**
+
+---
+
+## ⚙️ Hyperparameters
+
+| Parameter       | Value | Notes                                    |
+| --------------- | ----- | ---------------------------------------- |
+| `n_embd`        | 384   | Embedding dimension per token            |
+| `n_head`        | 6     | Attention heads per block (64 dims each) |
+| `n_layer`       | 6     | Transformer blocks stacked               |
+| `block_size`    | 256   | Maximum context length in tokens         |
+| `batch_size`    | 64    | Sequences processed per training step    |
+| `dropout`       | 0.3   | Reduces overfitting                      |
+| `learning_rate` | 1e-4  | AdamW learning rate                      |
+| `total_iters`   | 1000  | Training steps (early stopping used)     |
+| `eval_interval` | 50    | Validation checks                        |
+
+**Total parameters: ~20M**
+
+A note on model size: with a vocab size of 12,000 and 6 layers, the parameter count is higher than typical for a dataset this small. The larger embedding dimension helps represent the wider vocabulary more expressively. The tradeoff is faster overfitting, which is mitigated using dropout (0.3) and early stopping.
+
+---
+
+## 🌡️ Temperature Control
+
+I have implemented temperature-based sampling:
+
+* Lower temperature → more repetitive, high-probability words
+* Higher temperature → more creative and diverse output
+
+---
+
+## 📊 Sample Outputs
+
+### Example 1
+
+**Settings:** dropout = 0.3, temperature = 0.7, tokens generated = 256
+**Input:**
+
+```
+To be or not to be
+```
+
+<details>
+<summary>Click to expand full output</summary>
+
 ```
 To be, or not to be born.
 From my aid to go, my noble late is the day.
@@ -71,12 +114,22 @@ Or, I know I have made himself:
 'er struck in this royal king.
 Brother, your father would I think.
 ```
+
+</details>
+
 ---
 
-<br>
-- dropout = 0.4, Temperature = 0.7, tokens generated = 256 <br>
-  input : To be, or not to be<br>
-  output :
+### Example 2
+
+**Settings:** dropout = 0.4, temperature = 0.7, tokens generated = 256
+**Input:**
+
+```
+To be, or not to be
+```
+
+<details>
+<summary>Click to expand full output</summary>
 
 ```
 To be, or not to br Murderer:
@@ -114,24 +167,29 @@ And yet,
 The state, with the their heads of the world, I have made himself to make you know I am not to-morrow,
 Is I will prove your heart would I think.
 ```
-  
 
+</details>
 
+---
 
-## References and resources used :  
-1. The main structure of the code follows the code provided by **Andrej Karpathy** in his video on gpt-2 and the corresponding repo for the same video <br>
-   https://www.youtube.com/watch?v=kCc8FmEb1nY&t=4698s <br>
+## 📚 References and Resources
+
+1. Andrej Karpathy — GPT-2 lecture & repo
+   https://www.youtube.com/watch?v=kCc8FmEb1nY
    https://github.com/karpathy/ng-video-lecture
 
-2. I watched the pytorch basics tutorials from the following playlist from **Patrick Loeber** <br>
+2. Patrick Loeber — PyTorch tutorials
    https://www.youtube.com/playlist?list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4
 
-3. I used the tokenizer BPE that is provided by hugging face in their tokenizers library <br>
+3. Hugging Face Tokenizers
    https://huggingface.co/docs/tokenizers/quicktour
 
-4. The 3B1B videos helped me get the intuition of a Transformer and also read **Jay Alammar's** "The illustrated Transformer" <br>
-   https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi <br>
-   https://jalammar.github.io/illustrated-transformer/ <br>
+4. 3Blue1Brown & Jay Alammar
+   https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi
+   https://jalammar.github.io/illustrated-transformer/
 
-5. I also used wikipedia and geeksforgeeks to read about some of the techniques like dropout etc
-6. I also used LLMs like Gemini pro, chatgpt, claude for learning many concepts, understanding some code and tried understanding some papers like the attention is all you need and the one on batch normalization etc. 
+5. Additional reading: Wikipedia, GeeksforGeeks
+
+6. Used LLMs (ChatGPT, Claude, Gemini) for concept understanding and learning many concepts and also for code clarity
+
+---
